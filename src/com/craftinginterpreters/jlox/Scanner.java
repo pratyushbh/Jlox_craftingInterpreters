@@ -100,7 +100,7 @@ class Scanner{
 		while(isDigit(peek())) advance();
 		if(peek()== '.' && isDigit(peekNext())) {
 			
-			advance();
+			advance();	
 			
 			while(isDigit(peek())) advance();
 		}
