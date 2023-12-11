@@ -1,0 +1,12 @@
+class Hello{
+	init(name){
+		this.name=name;
+		print("Instance created");
+	}
+	speak(){
+		print("Hello "+this.name);
+	}
+}
+
+var h=Hello("pratyush");
+h.speak();
