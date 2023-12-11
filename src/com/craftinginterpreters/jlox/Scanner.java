@@ -58,7 +58,21 @@ class Scanner{
 			if(match('/')) {
 				while(peek() != '\n' && !isAtEnd()) advance();
 			}else {
+				if(match('*')) {
+					while(!isAtEnd()) {
+						if(peek()=='*') {
+							advance();
+							if(peek()=='/') {
+							advance();
+							break;
+							}
+						}
+						advance();
+					}
+				}
+				else {
 				addToken(SLASH);
+				}
 			}
 			break;
 		case '\r':
@@ -77,7 +91,7 @@ class Scanner{
 				identifier();
 			}
 			else {
-			Lox.error(line, "Unexpected character.");
+			Lox.error(current,line, "Unexpected character.");
 			}
 			break;
 		}
@@ -99,11 +113,11 @@ class Scanner{
 	private void number() {
 		while(isDigit(peek())) advance();
 		if(peek()== '.' && isDigit(peekNext())) {
-			
 			advance();	
 			
 			while(isDigit(peek())) advance();
 		}
+		System.out.println();
 		addToken(NUMBER,Double.parseDouble(source.substring(start,current)));
 	}
 	private void string() {
@@ -112,7 +126,7 @@ class Scanner{
 			advance();
 		}
 		if(isAtEnd()) {
-			Lox.error(line, "Unterminated string.");
+			Lox.error(current,line, "Unterminated string.");
 			return;
 		}
 		advance();

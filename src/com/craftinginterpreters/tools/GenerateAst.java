@@ -5,19 +5,41 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 
+//We need to separate the variable statements from different statements because variable binds a value to a identifier.
+
+
 public class GenerateAst{
 	public static void main(String[] args) throws IOException {
-		if(args.length !=1 ) {
-			System.err.println("Usage: generate_ast <output director>");
-			System.exit(64);
-		}
-		String outputDir=args[0];
-		defineAst(outputDir, "Expr",Arrays.asList(
+//		if(args.length !=1 ) {
+//			System.err.println("Usage: generate_ast <output director>");
+//			System.exit(64);
+//		}
+//		String outputDir=args[0];
+		defineAst("", "Expr",Arrays.asList(
+				"Assign		: 	Token name, Expr value",
 				"Binary 	:	Expr left, Token operator, Expr right",
+				"Call		:	Expr calle, Token paren, List<Expr> arguments",	
+				"Get		:	Expr object, Token name",
 				"Grouping	:	Expr expression",
 				"Literal 	: 	Object value",
-				"Unary		: 	Token operator, Expr right"	
+				"Logical	: 	Expr left, Token operator, Expr right",
+				"Set		:	Expr object, Token name, Expr value",	
+				"Super		: 	Token keyword, Token method",
+				"This		:	Token keyword",	
+				"Unary		: 	Token operator, Expr right"	,
+				"Variable 	:	Token name"
 		));
+//		defineAst("","Stmt",Arrays.asList(
+//				"Block		: List<Stmt> statments",
+//				"Class		: Token name, Expr.Variable superclass, List<Stmt.Function> methods",	
+//				"Expression : Expr expression",
+//				"Function	: Token name, List<Token> params, "+"List<Stmt> body",
+//				"If			: Expr condition, Stmt thenBranch,"+" Stmt elseBranch",		
+//				"Print		: Expr expression",
+//				"Return		: Token keyword, Expr value",
+//				"Var		: Token name, Expr initializer"	,
+//				"While		: Expr condition, Stmt body"
+//				));
 	}
 	private static void defineAst(
 		String outputDir,String baseName, List<String> types) throws IOException{
